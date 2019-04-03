@@ -57,7 +57,7 @@ public class Main {
         }*/
 
         //---Sort Alphabetically then print---//
-        sortAlphabetically(events);
+        sortCityAlphabetically(events);
 
         for(Event event: events){
             System.out.println(event.toString());
@@ -72,18 +72,24 @@ public class Main {
                 .get();
     }
 
-    public static String getCityNameFromEvent(List<Event> list, Integer id){
+    public static String getCityNameFromEvent(List<Event> list, Integer id){ // Using Optionals in case Location or City is null
         return Optional.ofNullable(getEventById(list, id))
                 .map(Event::getLocation)
                 .map(Location::getCity)
                 .map(City::getName)
-                .orElse("Sin Ciudad");
+                .orElse("Sin Ciudad"); //if null return this
     }
 
     public static List<Event> getFiveFistIds(List<Event> list){
-        /*Comparator<Event> byId                                   //Using comparator without the static import
+        //-------Using comparator without the static import--------
+        /*Comparator<Event> byId                                   //Using comparator with lambda
+                = Comparator.comparing((Event e) -> e.getId());*/
+
+        /*Comparator<Event> byId                                   //Replacing lambda with ::
                 = Comparator.comparing(Event::getId);
+
         list.sort(byId);*/
+        //---------------------------------------------------------
 
         list.sort(comparing(Event::getId));                        //needs static import of comparing
 
@@ -94,6 +100,9 @@ public class Main {
 
     public static void sortAlphabetically(List<Event> list){
         list.sort(comparing(Event::getName));                      //How do I sort by city name??
+    }
 
+    public static void sortCityAlphabetically(List<Event> list){   //Sorting by city names
+        list.sort(comparing(Utils::getCityNameFromEvent));         //Funciona, ya que sort y comparing se le pueden enviar el evento que esta comparando ya que sort se transforma en stream
     }
 }
