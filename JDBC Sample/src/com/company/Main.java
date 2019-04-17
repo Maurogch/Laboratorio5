@@ -18,7 +18,7 @@ public class Main {
         Statement stmt = null;
 
         try {
-            //STEP 2: Register JDBC driver
+
             Class.forName(JDBC_DRIVER);
 
             //STEP 3: Open a connection
