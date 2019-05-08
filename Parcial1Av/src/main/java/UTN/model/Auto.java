@@ -12,6 +12,14 @@ public class Auto {
     private String modelo;
     private List<Titular> titulares = new ArrayList<>();
 
+    public void addTitualar(Titular titular){
+        titulares.add(titular);
+    }
+
+    public int getSizeTitulares(){
+        return titulares.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,4 +43,13 @@ public class Auto {
         result = 31 * result + Arrays.hashCode(titulares);
         return result;
     }*/
+
+    @Override
+    public String toString() {
+        return "Auto{" +
+                "marca=" + marca +
+                ", anio=" + anio +
+                ", modelo='" + modelo + '\'' +
+                '}';
+    }
 }
