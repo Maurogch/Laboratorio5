@@ -7,6 +7,18 @@ public class Marca {
     private String nombreMarca;
     private String origen;
 
+    public int getId() {
+        return id;
+    }
+
+    public String getNombreMarca() {
+        return nombreMarca;
+    }
+
+    public String getOrigen() {
+        return origen;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

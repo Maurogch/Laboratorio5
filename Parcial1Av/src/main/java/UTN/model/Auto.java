@@ -12,6 +12,26 @@ public class Auto {
     private String modelo;
     private List<Titular> titulares = new ArrayList<>();
 
+    public int getId() {
+        return id;
+    }
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public int getAnio() {
+        return anio;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public List<Titular> getTitulares() {
+        return titulares;
+    }
+
     public Auto(int id) {
         this.id = id;
     }

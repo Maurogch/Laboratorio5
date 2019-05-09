@@ -8,6 +8,22 @@ public class Titular {
     private String apellido;
     private String dni;
 
+    public int getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
     public Titular(String nombre) {
         this.nombre = nombre;
     }
