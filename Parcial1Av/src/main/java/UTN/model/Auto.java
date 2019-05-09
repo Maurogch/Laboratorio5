@@ -12,6 +12,10 @@ public class Auto {
     private String modelo;
     private List<Titular> titulares = new ArrayList<>();
 
+    public Auto(int id) {
+        this.id = id;
+    }
+
     public void addTitualar(Titular titular){
         titulares.add(titular);
     }
@@ -52,4 +56,6 @@ public class Auto {
                 ", modelo='" + modelo + '\'' +
                 '}';
     }
+
+
 }

@@ -8,6 +8,10 @@ public class Titular {
     private String apellido;
     private String dni;
 
+    public Titular(String nombre) {
+        this.nombre = nombre;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
