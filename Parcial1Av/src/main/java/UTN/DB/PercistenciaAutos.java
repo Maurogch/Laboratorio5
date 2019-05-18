@@ -32,6 +32,7 @@ public class PercistenciaAutos {
             pStmt.setString(1,auto.getModelo());
             pStmt.setInt(2,auto.getAnio());
             pStmt.setInt(3,idMarca);
+            pStmt.execute();
 
             rs = pStmt.getGeneratedKeys();
             rs.next();

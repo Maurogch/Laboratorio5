@@ -19,7 +19,9 @@ public class Autos extends Observable {
 
     public void agregarTitular (final Auto auto, Titular titular){
         if(autos.contains(auto)){
+            autos.remove(auto);
             auto.addTitualar(titular);
+            autos.add(auto);
             setChanged();
             notifyObservers(auto);
         }else {
