@@ -10,17 +10,16 @@ import repository.PersonRepository;
 
 import java.util.List;
 
-@RequestMapping("/Persona")//cuando ejecutemos nuestro servicio, va a detectar que necesita de un servidor para funcionar. Desencadena la creacion de un servidor tomcat
+//@RequestMapping("/Persona")//cuando ejecutemos nuestro servicio, va a detectar que necesita de un servidor para funcionar. Desencadena la creacion de un servidor tomcat
 @RestController // le estamos diciendo a spring que toda la clase es un controlador y que va a tener llamados a distintos servicios
 public class PersonaController {
     @Autowired //inyecta lo necesario en el atributo de abajo
     private PersonRepository personRepository;
 
-    @PostMapping("") //la combinacion de un verbo(post/get) y el mapeo.
-    public void add(Persona p){
-
+    @PostMapping("/") //la combinacion de un verbo(post/get) y el mapeo.
+    public Persona add(Persona p){
         personRepository.save(p);
-
+        return p;
     }
 
     @GetMapping
