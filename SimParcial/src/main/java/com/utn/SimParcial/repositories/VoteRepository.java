@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface VoteRepository extends JpaRepository<Vote, Integer> {
 
-    @Query("SELECT * FROM Vote WHERE datetime = NOW() - INTERVAL ?1 MINUTE")
+    //nativeQuery needed otherwise there's "query Validation failed" error
+    @Query(value = "SELECT * FROM Vote WHERE datetime = NOW() - INTERVAL ?1 MINUTE", nativeQuery = true)
     List<Vote> getAllByMinuteInterval(Integer minutes);
 }
