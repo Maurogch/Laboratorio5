@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @RequestMapping("/Candidate")
 @RestController
@@ -68,10 +70,16 @@ public class CandidateController {
     //Easier method
     @GetMapping("/votes2")
     public Map<Candidate,Integer> getVotes2(){
-        List<Candidate> candidates = candidateRepository.findAll();
+        /*List<Candidate> candidates = candidateRepository.findAll();
         Map<Candidate, Integer> map = new HashMap<>();
 
         candidates.forEach(c -> map.put(c, c.getVotes().size()));
+        */
+
+        /*Java 8 way*/
+        Map<Candidate, Integer> map = candidateRepository.findAll().stream().collect(
+                    Collectors.toMap(candidate -> candidate, candidate -> candidate.getVotes().size())
+                );
         return map;
     }
 
