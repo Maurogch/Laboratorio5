@@ -77,14 +77,13 @@ public class CandidateController {
         */
 
         /*Java 8 way*/
-        Map<Candidate, Integer> map = candidateRepository.findAll().stream().collect(
-                    Collectors.toMap(candidate -> candidate, candidate -> candidate.getVotes().size())
-                );
-        return map;
+        return candidateRepository.findAll().stream().collect(
+                Collectors.toMap(candidate -> candidate, candidate -> candidate.getVotes().size())
+        );
     }
 
     @Scheduled(cron = "*/5 * * * *") //cron, every five minutes everyday
     public void deleteVotes(){
-        voteRepository.getAllByMinuteInterval(5).forEach(vote -> voteRepository.delete(vote));
+        voteRepository.deleteVotesOlderThanFiveMinutes();
     }
 }
