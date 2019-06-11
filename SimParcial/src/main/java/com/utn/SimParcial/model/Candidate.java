@@ -38,5 +38,3 @@ public class Candidate {
     @JsonManagedReference
     private List<Vote> votes;
 }
-
-
