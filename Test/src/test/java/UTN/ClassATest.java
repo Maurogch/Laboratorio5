@@ -9,29 +9,20 @@ import static org.junit.Assert.*;
 public class ClassATest {
 
     @Test
-    public void test1_9(){
-        int data = 1;
+    public void getDatoTest(){
         String res;
         ClassA classA = new ClassA();
+        Random rand = new Random();
 
-         res = classA.getDato(data);
+         res = classA.getDato(1);
 
         assertNotNull(res);
         assertEquals("UNOoNUEVE",res);
 
-       /* data = 9;
-
-        res = classA.getDato(data);
+        res = classA.getDato(9);
 
         assertNotNull(res);
-        assertEquals("UNOoNUEVE",res);*/
-    }
-
-    @Test
-    public void testRest(){
-        String res;
-        ClassA classA = new ClassA();
-        Random rand = new Random();
+        assertEquals("UNOoNUEVE",res);
 
         res = classA.getDato(2);
 
@@ -52,5 +43,12 @@ public class ClassATest {
 
         assertNotNull(res);
         assertEquals("NOVALIDO", res);
+    }
+
+    @Test
+    public void concatenateTest(){
+        ClassA classA = new ClassA();
+
+        assertEquals("UNODOS", classA.concatenate("UNO", "DOS"));
     }
 }
