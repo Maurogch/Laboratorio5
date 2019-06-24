@@ -4,6 +4,7 @@ import edu.utn.PracticaParcial.model.Player;
 import edu.utn.PracticaParcial.model.PlayerDTO;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -14,6 +15,12 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Configuration
 @EnableAsync
 public class AppConfiguration {
+    @Value("${executor.corePoolSize: 10}")
+    private Integer CORE_POOL_SIZE;
+    @Value("${executor.maxPoolSize: 50}")
+    private Integer MAX_POOL_SIZE;
+    @Value("${executor.queueCapacity: 500}")
+    private Integer QUEUE_CAPACITY;
 
     @Bean("ModelMapperPlayer")
     public ModelMapper modelMapper() {
@@ -41,9 +48,9 @@ public class AppConfiguration {
     public ThreadPoolTaskExecutor getThreadPoolTaskExecutor(){
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 
-        executor.setCorePoolSize(1);
-        executor.setMaxPoolSize(50);
-        executor.setQueueCapacity(100);
+        executor.setCorePoolSize(CORE_POOL_SIZE);
+        executor.setMaxPoolSize(MAX_POOL_SIZE);
+        executor.setQueueCapacity(QUEUE_CAPACITY);
         executor.initialize();
 
         return executor;
