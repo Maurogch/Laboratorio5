@@ -27,4 +27,9 @@ public class PlayerService {
     public CompletableFuture<List<PlayerNative>> getByMonthsInTeam(){
         return CompletableFuture.completedFuture(playerRepository.getAllWithMonthsInTeam());
     }
+
+    @Async("Executor")
+    public CompletableFuture<Integer> getCantPlayers(){
+        return CompletableFuture.completedFuture(playerRepository.getCantPlayers());
+    }
 }

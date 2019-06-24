@@ -14,8 +14,11 @@ public interface PlayerRepository extends JpaRepository<Player, Integer> {
 
     @Query(value = "select name, age, timestampdiff(month,registered_date,curdate()) as MonthsInTeam " +
             "from players " +
-            "where age > 20", nativeQuery = true)
+            "where age >= 20", nativeQuery = true)
     List<PlayerNative> getAllWithMonthsInTeam();
+
+    @Query(value = "select count(*) from players", nativeQuery = true)
+    Integer getCantPlayers();
 
 
 }

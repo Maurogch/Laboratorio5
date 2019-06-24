@@ -2,10 +2,13 @@ package edu.utn.PracticaParcial.controller;
 
 import edu.utn.PracticaParcial.model.Player;
 import edu.utn.PracticaParcial.model.PlayerDTO;
+import edu.utn.PracticaParcial.model.PlayersPerTeamDTO;
+import edu.utn.PracticaParcial.model.Team;
 import edu.utn.PracticaParcial.repository.PlayerNative;
 import edu.utn.PracticaParcial.repository.PlayerRepository;
 import edu.utn.PracticaParcial.repository.TeamRepository;
 import edu.utn.PracticaParcial.service.PlayerService;
+import edu.utn.PracticaParcial.service.TeamService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +47,17 @@ import static java.util.Objects.isNull;
 @RequestMapping("/player")
 public class PlayerController {
     @Autowired
-    private PlayerRepository playerRepository;
-    @Autowired
     private PlayerService playerService;
+    @Autowired
+    private TeamService teamService;
+
+    /*@Autowired
+    private PlayerRepository playerRepository;
     @Autowired
     private TeamRepository teamRepository;
     @Autowired
     @Qualifier("ModelMapperPlayer")
-    private ModelMapper modelMapper;
+    private ModelMapper modelMapper;*/
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
@@ -90,6 +96,22 @@ public class PlayerController {
         CompletableFuture<List<PlayerNative>> players = playerService.getByMonthsInTeam();
 
         return ResponseEntity.ok().body(players.join());
+    }
+
+    @GetMapping("/testing")
+    public ResponseEntity<?> algo(){
+        CompletableFuture<Integer> cantPlayers = playerService.getCantPlayers();
+        CompletableFuture<List<PlayersPerTeamDTO>> teamList = teamService.getAllWithPlayerQuantity();
+        int count = 0;
+
+        for (PlayersPerTeamDTO team:teamList.join()) {
+            count += team.getQuantity();
+        }
+
+        if(cantPlayers.join() == count)
+            return ResponseEntity.ok().body(teamList.join());
+        else
+            return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
     }
 
     //Example= localhost:8080/player/?teamName="Yupanki"
